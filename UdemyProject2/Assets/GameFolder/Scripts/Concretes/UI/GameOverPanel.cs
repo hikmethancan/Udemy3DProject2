@@ -3,16 +3,16 @@ using UnityEngine;
 
 namespace UdemyProject2.UI
 {
-    public class MenuPanel : MonoBehaviour
+    public class GameOverPanel : MonoBehaviour
     {
-        public void StartButton()
+        public void YesButton()
         {
             GameManager.Instance.LoadScene("Game");
         }
 
-        public void ExitButton()
+        public void NoButton()
         {
-            GameManager.Instance.ExitGame();
+            GameManager.Instance.LoadScene("Menu");
         }
     }
 }

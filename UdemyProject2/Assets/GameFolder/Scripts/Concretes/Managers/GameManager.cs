@@ -1,5 +1,7 @@
+using System.Collections;
 using UdemyProject2.Utilities;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace UdemyProject2.Managers
 {
@@ -16,9 +18,17 @@ namespace UdemyProject2.Managers
             Time.timeScale = 0f;
         }
 
-        public void LoadScene()
+        public void LoadScene(string sceneName)
         {
             Debug.Log("Load Scene");
+            StartCoroutine(SceneLoaderAsync(sceneName));
+        }
+
+        private IEnumerator SceneLoaderAsync(string sceneName)
+        {
+            //Time.timeScale = 1f when load scene timeScale must be 1;
+            Time.timeScale = 1f;
+            yield return SceneManager.LoadSceneAsync(sceneName);
         }
 
         public void ExitGame()
