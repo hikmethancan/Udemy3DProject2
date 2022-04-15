@@ -15,5 +15,16 @@ namespace UdemyProject2.Managers
             // Time.timeScale stopped the game
             Time.timeScale = 0f;
         }
+
+        public void LoadScene()
+        {
+            Debug.Log("Load Scene");
+        }
+
+        public void ExitGame()
+        {
+            Debug.Log("Exit Game");
+            Application.Quit();
+        }
     }
 }
