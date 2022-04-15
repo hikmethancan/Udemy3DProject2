@@ -1,6 +1,7 @@
 using System;
 using UdemyProject2.Abstracts.Inputs;
 using UdemyProject2.Inputs;
+using UdemyProject2.Managers;
 using UdemyProject2.Movements;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,6 +14,7 @@ namespace UdemyProject2.Controllers
         [SerializeField] private float _moveSpeed = 10f;
         [SerializeField] private float _jumpForce;
         [SerializeField] private bool _isJump;
+        [SerializeField] private bool _isDead;
         
         private HorizontalMover _horizontalMover;
         private JumpWithRigidbody _jump;
@@ -30,6 +32,8 @@ namespace UdemyProject2.Controllers
 
         private void Update()
         {
+            if(_isDead) return;
+            
              _horizontal = _ınput.Horizontal ;
 
              if (_ınput.Jump)
@@ -40,6 +44,8 @@ namespace UdemyProject2.Controllers
 
         private void FixedUpdate()
         {
+            if(_isDead) return;
+            
             _horizontalMover.TickFixed(_horizontal);
 
             if (_isJump)
@@ -47,7 +53,17 @@ namespace UdemyProject2.Controllers
                 _jump.TickFixed(_jumpForce);
             }
             _isJump = false;
+        }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            var enemyController = other.gameObject.GetComponent<EnemyController>();
+
+            if (enemyController != null)
+            {
+                GameManager.Instance.StopGame();
+                _isDead = true;
+            }
         }
     }
 }
