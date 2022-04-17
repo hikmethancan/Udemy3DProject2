@@ -1,4 +1,5 @@
 using UdemyProject2.Abstracts.Controllers;
+using UdemyProject2.Enums;
 using UdemyProject2.Managers;
 using UdemyProject2.Movements;
 using UnityEngine;
@@ -7,6 +8,7 @@ namespace UdemyProject2.Controllers
 {
     public class EnemyController : MonoBehaviour, IEntityController
     {
+        [SerializeField] private EnemyEnum _enemyEnum;
         [SerializeField] private float _maxLifeTime = 10f;
 
         private VerticalMover _verticalMover;
@@ -14,6 +16,7 @@ namespace UdemyProject2.Controllers
         public float MoveSpeed { get; }
         public float MoveBoundary { get; }
 
+        public EnemyEnum EnemyType => _enemyEnum;
         private void Awake()
         {
             _verticalMover = new VerticalMover(this);

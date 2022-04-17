@@ -1,4 +1,5 @@
 
+using UdemyProject2.Enums;
 using UdemyProject2.Managers;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -35,11 +36,11 @@ namespace UdemyProject2.Controllers
 
         private void Spawn()
         {
-            var newEnemy = EnemyManager.Instance.GetPool();
+            var newEnemy = EnemyManager.Instance.GetPool((EnemyEnum)Random.Range(0,4));
             newEnemy.transform.parent = this.transform;
             newEnemy.transform.position = this.transform.position;
             newEnemy.gameObject.SetActive(true);
-
+            
             _currentSpawnTime = 0f;
             GetRandomMaxTime();
         }
