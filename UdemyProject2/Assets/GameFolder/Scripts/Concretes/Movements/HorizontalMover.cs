@@ -1,25 +1,28 @@
-using UdemyProject2.Controllers;
+using UdemyProject2.Abstracts.Controllers;
+using UdemyProject2.Abstracts.Movements;
 using UnityEngine;
 
 namespace UdemyProject2.Movements
 {
-    public class HorizontalMover
+    public class HorizontalMover : IMover
     {
-        private PlayerController _playerController;
+        private IEntityController _playerController;
         private float _moveSpeed;
         private float _moveBoundary;
-        public HorizontalMover(PlayerController playerController)
+
+        public HorizontalMover(IEntityController entityController)
         {
-            _playerController = playerController;
+            _playerController = entityController;
             _moveSpeed = _playerController.MoveSpeed;
             _moveBoundary = _playerController.MoveBoundary;
         }
 
-        public void TickFixed(float horizontal)
+
+        public void FixedTick(float direction)
         {
-            if (horizontal == 0f) return;
+            if (direction == 0f) return;
             // var playerTransform = _playerController.transform;
-            _playerController.transform.Translate(Vector3.right * horizontal * Time.deltaTime * _moveSpeed);
+            _playerController.transform.Translate(Vector3.right * direction * Time.deltaTime * _moveSpeed);
 
             var boundary = Mathf.Clamp(_playerController.transform.position.x, -_moveBoundary, _moveBoundary);
 

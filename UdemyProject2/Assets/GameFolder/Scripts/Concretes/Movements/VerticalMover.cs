@@ -1,16 +1,17 @@
-using UdemyProject2.Controllers;
+using UdemyProject2.Abstracts.Controllers;
+using UdemyProject2.Abstracts.Movements;
 using UnityEngine;
 
 namespace UdemyProject2.Movements
 {
-    public class VerticalMover
+    public class VerticalMover : IMover
     {
-        private EnemyController _enemyController;
+        private IEntityController _enemyController;
         private float _moveSpeed = 10f;
 
-        public VerticalMover(EnemyController enemyController)
+        public VerticalMover(IEntityController entityController)
         {
-            _enemyController = enemyController;
+            _enemyController = entityController;
         }
 
         public void FixedTick(float vertical = 1f)

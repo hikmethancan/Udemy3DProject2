@@ -1,5 +1,6 @@
-using System;
+using UdemyProject2.Abstracts.Controllers;
 using UdemyProject2.Abstracts.Inputs;
+using UdemyProject2.Abstracts.Movements;
 using UdemyProject2.Inputs;
 using UdemyProject2.Managers;
 using UdemyProject2.Movements;
@@ -8,7 +9,7 @@ using UnityEngine.InputSystem;
 
 namespace UdemyProject2.Controllers
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour,IEntityController
     {
         [SerializeField] private float _moveBoundary = 4.5f;
         [SerializeField] private float _moveSpeed = 10f;
@@ -16,8 +17,8 @@ namespace UdemyProject2.Controllers
         [SerializeField] private bool _isJump;
         [SerializeField] private bool _isDead;
         
-        private HorizontalMover _horizontalMover;
-        private JumpWithRigidbody _jump;
+        private IMover _mover;
+        private IJump _jump;
         private IInputReader _ınput;
         private float _horizontal;
 
@@ -25,7 +26,7 @@ namespace UdemyProject2.Controllers
         public float MoveBoundary => _moveBoundary;
         private void Awake()
         {
-            _horizontalMover = new HorizontalMover(this);
+            _mover = new HorizontalMover(this);
             _jump = new JumpWithRigidbody(this);
             _ınput = new InputReader(GetComponent<PlayerInput>());
         }
@@ -46,20 +47,20 @@ namespace UdemyProject2.Controllers
         {
             if(_isDead) return;
             
-            _horizontalMover.TickFixed(_horizontal);
+            _mover.FixedTick(_horizontal);
 
             if (_isJump)
             {
-                _jump.TickFixed(_jumpForce);
+                _jump.FixedTick(_jumpForce);
             }
             _isJump = false;
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            var enemyController = other.gameObject.GetComponent<EnemyController>();
+            IEntityController ıEntityController = other.gameObject.GetComponent<IEntityController>();
 
-            if (enemyController != null)
+            if (ıEntityController != null)
             {
                 GameManager.Instance.StopGame();
                 _isDead = true;
