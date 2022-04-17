@@ -1,4 +1,5 @@
 using System;
+using UdemyProject2.Managers;
 using UdemyProject2.Movements;
 using UnityEngine;
 
@@ -31,7 +32,7 @@ namespace UdemyProject2.Controllers
 
         private void KillYourSelf()
         {
-            Destroy(gameObject);
+            EnemyManager.Instance.SetPool(this);
         }
 
         private void FixedUpdate()

@@ -7,6 +7,7 @@ namespace UdemyProject2.Managers
 {
     public class GameManager : SingletonObjects<GameManager>
     {
+        public event System.Action OnGameStop;
         private void Awake()
         {
             SingletonObject(this);
@@ -16,6 +17,7 @@ namespace UdemyProject2.Managers
         {
             // Time.timeScale stopped the game
             Time.timeScale = 0f;
+            OnGameStop?.Invoke();
         }
 
         public void LoadScene(string sceneName)
