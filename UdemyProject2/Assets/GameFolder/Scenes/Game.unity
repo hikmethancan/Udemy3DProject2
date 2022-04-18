@@ -355,6 +355,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5728172142931382738, guid: 853442b8458f4e144bbc96074e89d955, type: 3}
     - target: {fileID: 2398852551634170667, guid: 285628ae14e99c042ba8f44e451c89f9, type: 3}
+      propertyPath: _addDelayTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2398852551634170667, guid: 285628ae14e99c042ba8f44e451c89f9, type: 3}
       propertyPath: _enemyPrefab.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -632,7 +636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5548939182968273960, guid: afcad4da67181eb458ca3cc1615194b2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5548939182968273964, guid: afcad4da67181eb458ca3cc1615194b2, type: 3}
       propertyPath: m_RootOrder

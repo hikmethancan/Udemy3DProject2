@@ -10,10 +10,13 @@ namespace UdemyProject2.Managers
     public class EnemyManager : SingletonObjects<EnemyManager>
     {
         [SerializeField] private EnemyController[] _enemyPrefab;
+        [SerializeField] private float _addDelayTime;
         
         private Dictionary<EnemyEnum, Queue<EnemyController>> _enemies =
-            new Dictionary<EnemyEnum, Queue<EnemyController>>(); 
+            new Dictionary<EnemyEnum, Queue<EnemyController>>();
 
+        public float AddDelayTime => _addDelayTime;
+        public int Count => _enemyPrefab.Length;
         private void Awake()
         {
             SingletonObject(this);
